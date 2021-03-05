@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lgoin</title>
+    <link rel="stylesheet" href="./Layui/layui/css/layui.css">
+</head>
+
+<style type="text/css">
+h2 {
+	color:#FFF;
+	font-size:50px
+}
+
+.touming {
+	width: 32%;
+	margin: 50px auto;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.43);
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+ #img {
+     width: 25px;
+     height: 15px;
+     position: absolute;
+     right: 5px;
+     margin-top: 12px;
+     top: 1px;
+     text-align: center;
+ }
+
+</style>
+
+<body background="Img/Login.jpg" >
+
+	<div class="touming">
+	
+		<h2>Login</h2>
+		<form class="layui-form" action="">
+			<div style="margin-right: 18%;">
+			 <div class="layui-form-item" style="margin-top: 10%;">
+	    		 <div class="layui-input-block">
+	      		 	<input type="text" id="title" name="title"  required lay-verify="required" autocomplete="off" placeholder="请输入账户" class="layui-input">
+	    		 </div>
+  			 </div>
+  			 
+  			 <div class="layui-form-item" style="margin-top: 10%;">
+	    		 <div class="layui-input-block">
+	      		 	<input type="password" id="password" name="password" lay-verify="required" required  placeholder="请输入密码" autocomplete="off" class="layui-input">
+	    		 	<div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+             		<img id="img" onclick="hideShowPsw()" src="Img/ky.png" />
+	    		 </div>
+  			 </div>
+  			 
+  			 
+  			 <div class="layui-form-item" style="margin-top: 10%;">
+	    		 <div class="layui-input-block">
+	      		 	<button type="submit" id="Login" style="margin-bottom: 5%;" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-lg " lay-submit="" lay-filter="demo1" >Login</button>
+	    		 </div>
+  			 </div>  
+  			 
+  			 <div class="layui-form-item">
+	    		 <div class="layui-input-block">
+	      		 	<button type="button" id="Register" style="margin-bottom: 10%;" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-lg " onClick="window.location.href='Register'" >Register</button>
+	    		 </div>
+  			 </div>  
+  			 
+  			</div>			 
+		</form>
+	
+	</div>
+
+</body>
+<link rel="stylesheet" href="./Layui/layui/css/layui.css">
+<script src="./Layui/layui/layui.js"></script>
+<script>
+
+	//隐藏text block，显示password block
+	var demoImg = document.getElementById("img");
+	var PWD = document.getElementById("LAY-user-login-password");
+	
+	function hideShowPsw() {
+	    if (password.type == "password") {
+	    	password.type = "text";
+	        demoImg.src = "Img/by.png"; //图片路径（闭眼图片）
+	    } else {
+	    	password.type = "password";
+	        demoImg.src = "Img/ky.png"; // 图片路径（睁眼图片）
+	
+	    }
+	}
+
+	layui.use(['table','laydate','jquery'],function(){
+		var table = layui.table,
+		laydate = layui.laydate,
+		$ = layui.jquery;
+		
+		
+		$('#Login').click(function(){
+			
+			$.ajax({
+				url:'http://localhost:80/get',
+				data:{
+					Name:$("#title").val(),
+					Pwd:$("#password").val()
+				},
+				type:'GET',
+				success:function(data){
+					//debugger;
+					//alert(data[0].name);
+					//layer.msg('提交成功');
+				}
+			})
+		})
+	})
+
+</script>
+
+
+</html>
